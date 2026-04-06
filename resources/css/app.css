@@ -1,11 +1,55 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@import '@fortawesome/fontawesome-free/css/all.css';
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── GLOBAL TYPOGRAPHY ─── */
+:root {
+    --font-body: 'Barlow', sans-serif;
+    --font-heading: 'Instrument Serif', serif;
+}
+
+html, body {
+    font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+}
+
+/* FontAwesome icon styling for consistency */
+i[class*="fas"],
+i[class*="far"],
+i[class*="fal"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2em;
+    height: 1.2em;
+    flex-shrink: 0;
+}
+
+.sb-a i {
+    width: 17px;
+    height: 17px;
+    margin-right: 0.3em;
+}
+
+.ic-btn i {
+    width: 16px;
+    height: 16px;
+}
+
+.s-icon i,
+.q-icon i {
+    font-size: 1.3em;
+}
+
+.lbl i {
+    width: 12px;
+    height: 12px;
+    margin-right: 0.2em;
 }

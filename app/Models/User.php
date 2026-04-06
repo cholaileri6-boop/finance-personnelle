@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+    'name',
+    'email',
+    'password',
+    'is_admin', // ← ajoutez cette ligne
     ];
 
     /**
@@ -38,11 +39,35 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+   protected $casts = [
+   'email_verified_at' => 'datetime',
+   'password' => 'hashed',
+   'is_admin' => 'boolean',
+   ];
+
+   
+    public function revenus()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+    return $this->hasMany(Revenu::class);
+    }
+
+    public function depenses()
+    {
+    return $this->hasMany(Depense::class);
+    }
+
+    public function categories()
+    {
+    return $this->hasMany(Category::class);
+    }
+
+    public function budgets()
+    {
+    return $this->hasMany(Budget::class);
+    }
+
+    public function alerts()
+    {
+    return $this->hasMany(Alert::class);
     }
 }
