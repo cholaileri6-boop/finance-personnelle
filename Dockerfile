@@ -1,7 +1,7 @@
-# Étape 1 : image PHP + Apache
+# Étape 1 : base PHP + Apache
 FROM php:8.2-apache
 
-# Installer les dépendances système
+# Installer les dépendances système nécessaires
 RUN apt-get update && apt-get install -y \
     git \
     zip unzip \
@@ -12,13 +12,13 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql mbstring xml zip \
     && a2enmod rewrite
 
-# Copier le projet
+# Copier tout le projet
 COPY . /var/www/html
 
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Installer Composer
+# Installer Composer depuis l'image officielle
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Installer les dépendances PHP
