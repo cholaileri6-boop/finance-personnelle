@@ -16,7 +16,14 @@ RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Forcer DocumentRoot sur /public
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+# Dockerfile
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
+# Met à jour la config Apache pour prendre en compte le nouveau DocumentRoot
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
+
+# Active rewrite module
+RUN a2enmod rewrite
 EXPOSE 80
 CMD ["apache2-foreground"]
