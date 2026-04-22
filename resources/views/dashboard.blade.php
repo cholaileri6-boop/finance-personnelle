@@ -896,4 +896,3 @@
             }
         });
     </script>
-</x-app-layout>
